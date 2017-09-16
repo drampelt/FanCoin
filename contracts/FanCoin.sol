@@ -32,6 +32,10 @@ contract FanCoin is MintableToken {
   function FanCoin() {
     totalSupply = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
+
+    updateProfile("Test Content Creator", "First user of the platform", 5);
+    createPost("An amazing post");
+    createPost("Another amazing post");
   }
 
   function getFans(address _creator) constant returns (address[]) {
