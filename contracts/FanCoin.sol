@@ -29,6 +29,7 @@ contract FanCoin is MintableToken {
   mapping (address => address[]) fans;
   mapping (address => address[]) supporting;
   mapping (address => Profile) profiles;
+  address[] publishedProfiles;
 
   function FanCoin() {
     totalSupply = INITIAL_SUPPLY;
@@ -63,6 +64,10 @@ contract FanCoin is MintableToken {
     return supportedPosts[_fan];
   }
 
+  function getPublishedProfiles() constant returns (address[]) {
+    return publishedProfiles;
+  }
+
   function getProfile(address _user) constant returns (string username, string description, uint cost) {
     username = profiles[_user].username;
     description = profiles[_user].description;
@@ -73,6 +78,18 @@ contract FanCoin is MintableToken {
     require(bytes(_username).length <= 128 && bytes(_description).length <= 4096);
 
     profiles[msg.sender] = Profile(true, _username, _description, _cost);
+
+    bool found = false;
+    for (uint i = 0; i < publishedProfiles.length; i++) {
+      if (publishedProfiles[i] == msg.sender) {
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      publishedProfiles.push(msg.sender);
+    }
 
     return msg.sender;
   }
