@@ -10,14 +10,15 @@ contract FanCoin is MintableToken {
   uint64 nextPostId = 1;
 
   struct Profile {
+    bool exists;
     string username;
     string description;
+    uint cost;
   }
 
   struct Post {
     uint64 id;
     address owner;
-    uint cost;
     string content;
   }
 
@@ -41,11 +42,10 @@ contract FanCoin is MintableToken {
     return supporting[_fan];
   }
 
-  function getPost(uint64 _id) constant returns (uint64 id, address owner, uint cost, string content) {
+  function getPost(uint64 _id) constant returns (uint64 id, address owner, string content) {
     require(allPosts[_id].id > 0);
     id = _id;
     owner = allPosts[_id].owner;
-    cost = allPosts[_id].cost;
     content = allPosts[_id].content;
   }
 
@@ -57,15 +57,16 @@ contract FanCoin is MintableToken {
     return supportedPosts[_fan];
   }
 
-  function getProfile(address _user) constant returns (string username, string description) {
+  function getProfile(address _user) constant returns (string username, string description, uint cost) {
     username = profiles[_user].username;
     description = profiles[_user].description;
+    cost = profiles[_user].cost;
   }
 
-  function updateProfile(string _username, string _description) returns (address) {
+  function updateProfile(string _username, string _description, uint _cost) returns (address) {
     require(bytes(_username).length <= 128 && bytes(_description).length <= 4096);
 
-    profiles[msg.sender] = Profile(_username, _description);
+    profiles[msg.sender] = Profile(true, _username, _description, _cost);
 
     return msg.sender;
   }
@@ -125,18 +126,21 @@ contract FanCoin is MintableToken {
     return _creator;
   }
 
-  function createPost(uint _cost, string _content) returns (uint64 id) {
+  function createPost(string _content) returns (uint64 id) {
     require(bytes(_content).length < 4096);
 
+    Profile memory profile = profiles[msg.sender];
+    require(profile.exists);
+
     id = nextPostId++;
-    allPosts[id] = Post(id, msg.sender, _cost, _content);
+    allPosts[id] = Post(id, msg.sender, _content);
     ownedPosts[msg.sender].push(id);
 
     for (uint i = 0; i < fans[msg.sender].length; i++) {
-      if (balanceOf(fans[msg.sender][i]) >= _cost) {
-        balances[fans[msg.sender][i]] = balances[fans[msg.sender][i]].sub(_cost);
-        balances[msg.sender] = balances[msg.sender].add(_cost);
-        Transfer(fans[msg.sender][i], msg.sender, _cost);
+      if (balanceOf(fans[msg.sender][i]) >= profile.cost) {
+        balances[fans[msg.sender][i]] = balances[fans[msg.sender][i]].sub(profile.cost);
+        balances[msg.sender] = balances[msg.sender].add(profile.cost);
+        Transfer(fans[msg.sender][i], msg.sender, profile.cost);
         supportedPosts[fans[msg.sender][i]].push(id);
       }
     }
