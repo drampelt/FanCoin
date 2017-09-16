@@ -20,6 +20,7 @@ contract FanCoin is MintableToken {
     uint64 id;
     address owner;
     string content;
+    uint timestamp;
   }
 
   mapping (uint64 => Post) allPosts;
@@ -32,6 +33,10 @@ contract FanCoin is MintableToken {
   function FanCoin() {
     totalSupply = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
+
+    updateProfile("Test Content Creator", "First user of the platform", 5);
+    createPost("An amazing post");
+    createPost("Another amazing post");
   }
 
   function getFans(address _creator) constant returns (address[]) {
@@ -42,11 +47,12 @@ contract FanCoin is MintableToken {
     return supporting[_fan];
   }
 
-  function getPost(uint64 _id) constant returns (uint64 id, address owner, string content) {
+  function getPost(uint64 _id) constant returns (uint64 id, address owner, string content, uint timestamp) {
     require(allPosts[_id].id > 0);
     id = _id;
     owner = allPosts[_id].owner;
     content = allPosts[_id].content;
+    timestamp = allPosts[_id].timestamp;
   }
 
   function getOwnedPosts(address _creator) constant returns (uint64[]) {
@@ -133,7 +139,7 @@ contract FanCoin is MintableToken {
     require(profile.exists);
 
     id = nextPostId++;
-    allPosts[id] = Post(id, msg.sender, _content);
+    allPosts[id] = Post(id, msg.sender, _content, block.timestamp);
     ownedPosts[msg.sender].push(id);
 
     for (uint i = 0; i < fans[msg.sender].length; i++) {
