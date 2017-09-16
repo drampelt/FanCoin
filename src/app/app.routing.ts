@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { ExploreComponent } from './explore/explore.component';
 
 
 const appRoutes: Routes = [
@@ -16,6 +17,10 @@ const appRoutes: Routes = [
     {
         path:"profile",
         component: ProfileComponent,
+    },
+    {
+      path:"explore",
+      component: ExploreComponent,
     },
     // {
     //     path:"videos",

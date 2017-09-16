@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
+import { ExploreComponent } from './explore/explore.component';
 
 const appRoutes: Routes = [
   { path: 'profile', component: LandingPageComponent },
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
     AppComponent,
     NavigationComponent,
     ProfileComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    ExploreComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
