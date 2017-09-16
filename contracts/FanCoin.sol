@@ -124,4 +124,22 @@ contract FanCoin is MintableToken {
 
     return _creator;
   }
+
+  function createPost(uint _cost, string _content) returns (uint64 id) {
+    require(bytes(_content).length < 4096);
+
+    id = nextPostId++;
+    allPosts[id] = Post(id, msg.sender, _cost, _content);
+    ownedPosts[msg.sender].push(id);
+
+    for (uint i = 0; i < fans[msg.sender].length; i++) {
+      if (balanceOf(fans[msg.sender][i]) >= _cost) {
+        balances[fans[msg.sender][i]] = balances[fans[msg.sender][i]].sub(_cost);
+        balances[msg.sender] = balances[msg.sender].add(_cost);
+        Transfer(fans[msg.sender][i], msg.sender, _cost);
+        supportedPosts[fans[msg.sender][i]].push(id);
+      }
+    }
+    return id;
+  }
 }
