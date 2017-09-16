@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { AppComponent } from './app.component';
     HttpModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigationComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
