@@ -119,7 +119,7 @@ export class ExploreComponent implements OnInit {
         });
       })
     .then(profile => {
-      return { address, name: profile[0], description: profile[1], cost: profile[2].toNumber() };
+      return { address, name: profile[0], description: profile[1], cost: profile[2].toNumber(), numFans: profile[3].toNumber() };
     })
     .catch(e => {
       console.log(e);

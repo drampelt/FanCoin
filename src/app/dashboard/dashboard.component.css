@@ -28,3 +28,8 @@
 .subtitle {
 	text-align: center;
 }
+
+.dashboard-title {
+  text-align: center;
+  margin-top: 32px;
+}
