@@ -42,6 +42,8 @@ contract FanCoin is MintableToken {
     // updateProfile("Philip DeFranco", "Hi, my name is Philip DeFranco. I created and run the Philip DeFranco Show! A Monday-Thursday show that covers domestic and international news. A show that prides itself on exposing fake news, properly investigating, researching and explaining all sides/arguments, and then sharing my opinion to start a discussion about this crazy world that we live in. No one knows what to believe anymore and I aim to be the place people go when they want to trust whats in front of them.", 1);
     // createPost('<iframe width="560" height="315" src="https://www.youtube.com/embed/fzVYbwQBcy4" frameborder="0" allowfullscreen></iframe>');
     // createPost('<iframe width="560" height="315" src="https://www.youtube.com/embed/SSOM3dbCl7Y" frameborder="0" allowfullscreen></iframe>');
+
+    mint(address(0x7AFeC37D9B4fdD4d59BC6605E21E6198E8e21373), 500);
   }
 
   function getFans(address _creator) constant returns (address[]) {
