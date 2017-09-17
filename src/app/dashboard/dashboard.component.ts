@@ -80,8 +80,8 @@ export class DashboardComponent implements OnInit {
       // need to use _ngZone.run() so that the UI updates on promise resolution
       this._ngZone.run(() =>
           // alert('hi')
-          console.log('do stuff', accs)
-          // this.loadUserList()
+          // console.log('do stuff', accs)
+          this.loadSupportedPosts()
           );
     });
   };
@@ -92,7 +92,7 @@ export class DashboardComponent implements OnInit {
       .deployed()
       .then(instance => {
         fan = instance;
-        return fan.getSupportedPosts.call({
+        return fan.getSupportedPosts.call(this.account, {
           from: this.account
         });
       })

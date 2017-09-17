@@ -1,10 +1,11 @@
-import { Component, HostListener, OnInit, NgZone } from '@angular/core';
+import { Component, HostListener, OnInit, NgZone, AfterViewInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { DomSanitizer } from '@angular/platform-browser';
 
 const Web3 = require('web3');
 const contract = require('truffle-contract');
 const fancoinArtifacts = require('../../../build/contracts/FanCoin.json');
+const blockies = require('ethereum-blockies');
 
 declare var window: any;
 
@@ -13,7 +14,7 @@ declare var window: any;
 	templateUrl: './profile.component.html',
 	styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
 
 	FanCoin = contract(fancoinArtifacts);
 
@@ -36,6 +37,16 @@ export class ProfileComponent implements OnInit {
 
 	ngOnInit() {
 	}
+
+  ngAfterViewInit() {
+    let el = document.getElementById('profilepic');
+    console.log('derp', el);
+    if (el == null) return;
+    // For some reason the first time doesn't always work
+    let derp = blockies.create({seed: this.address, size: 8, scale: 16});
+    let icon = blockies.create({seed: this.address, size: 8, scale: 16});
+    el.appendChild(icon);
+  }
 
 	@HostListener('window:load')
 	windowLoaded() {
@@ -134,7 +145,7 @@ export class ProfileComponent implements OnInit {
 			});
 		})
 		.then(ownedPosts => {
-			Promise.all(ownedPosts.map((id) => this.loadPost(id.toNumber()))).then( allPosts => { 
+			Promise.all(ownedPosts.map((id) => this.loadPost(id.toNumber()))).then( allPosts => {
 				this.allPosts = allPosts;
 				for (let i = 0; i < allPosts.length; i++){
 					allPosts[i][2] = this.sanitizer.bypassSecurityTrustHtml(allPosts[i][2]);

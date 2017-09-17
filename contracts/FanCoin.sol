@@ -148,7 +148,7 @@ contract FanCoin is MintableToken {
         break;
       }
     }
-    require(found && fans[_creator].length > 0);
+    require(found && length > 0);
     fans[_creator][index] = fans[_creator][length - 1];
     delete fans[_creator][length - 1];
 
