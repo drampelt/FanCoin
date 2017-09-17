@@ -32,7 +32,6 @@ export class ProfileComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.isFan();
 	}
 
 	@HostListener('window:load')
@@ -91,6 +90,7 @@ export class ProfileComponent implements OnInit {
 
 				this.loadProfile(profileAddress)
 				this.loadOwnedPosts(profileAddress)
+				this.isFan();
 			});
 
 			// This is run from window:load and ZoneJS is not aware of it we
@@ -161,13 +161,11 @@ export class ProfileComponent implements OnInit {
 		.deployed()
 		.then(instance => {
 			fan= instance;
-			debugger;
 			return fan.isFanOf.call(this.address, {from: this.account});
 		})
 		.then(isFanOf => {
 			this.isFanOf = isFanOf;
-			console.log(isFanOf)
-			debugger;})
+			console.log(isFanOf)})
 		.catch(e => {console.log(e)})
 	}
 
@@ -179,7 +177,19 @@ export class ProfileComponent implements OnInit {
 			fan= instance;
 			return fan.becomeFan(this.address, {from: this.account});
 		})
-		.then()
+		.then(this.isFan())
+		.catch(e => {console.log(e)})
+	}
+
+	stopSupporting = (event) => {
+		let fan;
+		return this.FanCoin
+		.deployed()
+		.then(instance => {
+			fan= instance;
+			return fan.stopSupporting(this.address, {from: this.account});
+		})
+		.then(this.isFan())
 		.catch(e => {console.log(e)})
 	}
 

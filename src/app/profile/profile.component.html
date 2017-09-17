@@ -9,7 +9,7 @@
       <a class="button is-primary become_fan_button" (click)="becomeFan($event)">Become a Fan!</a>
     </div>
     <div class="actionbutton" *ngIf="!ownProfile && isFanOf">
-      <a class="button is-danger become_fan_button ">Unfollow</a>
+      <a class="button is-danger become_fan_button" (click)="stopSupporting($event)">Unfollow</a>
     </div>
     <div class="actionbutton" *ngIf="ownProfile">
       <a class="button is-primary become_fan_button">Change Profile</a>
@@ -24,7 +24,7 @@
   		<div class="card-content">
   			<div class="media">
   				<div class="media-content">
-  					<p class="title is-4">{{post[2]}}</p> <br>
+  					<div></div> <br>
   					<p class="subtitle is-6">{{name}}</p>
   				</div>
   			</div>
