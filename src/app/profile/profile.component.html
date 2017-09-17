@@ -2,7 +2,14 @@
   <div class="card introduction">
   <header>
     <div id="profilepic"></div>
-    <h1> <b>{{name}}</b></h1>
+    <h1> <b>{{name}}</b> </h1>
+    <h4 [ngPlural]="numFans">
+      <ng-template ngPluralCase="=0">No fans yet</ng-template>
+      <ng-template ngPluralCase="=1">1 fan</ng-template>
+      <ng-template ngPluralCase="other">{{numFans}} fans</ng-template>
+      <span *ngIf="numFans > 0">sponsoring {{numFans * cost}} FAN per creation</span>
+    </h4>
+    <hr/>
     <h2> {{description}} </h2>
     <span class="cost"> {{cost}} FAN per creation </span>
     <div class="actionbutton" *ngIf="!ownProfile && !isFanOf">

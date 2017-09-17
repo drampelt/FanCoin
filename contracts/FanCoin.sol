@@ -5,7 +5,7 @@ contract FanCoin is MintableToken {
   string public name = 'FanCoin';
   string public symbol = 'FAN';
   uint public decimals = 0;
-  uint public INITIAL_SUPPLY = 1000;
+  uint public INITIAL_SUPPLY = 857;
 
   uint64 nextPostId = 1;
 
@@ -43,7 +43,12 @@ contract FanCoin is MintableToken {
     // createPost('<iframe width="560" height="315" src="https://www.youtube.com/embed/fzVYbwQBcy4" frameborder="0" allowfullscreen></iframe>');
     // createPost('<iframe width="560" height="315" src="https://www.youtube.com/embed/SSOM3dbCl7Y" frameborder="0" allowfullscreen></iframe>');
 
-    mint(address(0x7AFeC37D9B4fdD4d59BC6605E21E6198E8e21373), 500);
+    mint(address(0x7AFeC37D9B4fdD4d59BC6605E21E6198E8e21373), 493);
+    mint(address(0x5Ed75f51ab7315c27F3e6d9939a27B02B0e929e3), 132);
+    mint(address(0xbDa9FFdd8d3d3a31F8B30119Be1aCF0C2E91A8ce), 67);
+    mint(address(0x57442CdE174c3752640d519fAB690E463d3FC853), 343);
+    mint(address(0xDE5C28279b5ed90143327AFE32C5a459B36122E8), 687);
+    mint(address(0x9d458f150ED2ee468E36733fBb78f01b944985df), 181);
   }
 
   function getFans(address _creator) constant returns (address[]) {

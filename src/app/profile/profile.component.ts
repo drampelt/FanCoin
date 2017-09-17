@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 	name: any;
 	description: any;
 	cost: any;
+  numFans: any = 0;
 	ownProfile: boolean;
 	allPosts: any;
 	isFanOf: boolean;
@@ -126,6 +127,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			this.name = profile[0];
 			this.description = profile[1];
 			this.cost = profile[2];
+      this.numFans = profile[3].toNumber();
 			return { address, name: profile[0], description: profile[1], cost: profile[2].toNumber() };
 		})
 		.catch(e => {
