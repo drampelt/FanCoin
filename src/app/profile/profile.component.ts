@@ -132,11 +132,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			this.description = profile[1];
 			this.profileDescription = this.description;
 			this.cost = profile[2];
-<<<<<<< HEAD
 			this.profilePrice = this.cost;
-=======
-      this.numFans = profile[3].toNumber();
->>>>>>> 702098b8bf33439c0085c22ebd0412149580369b
+      		this.numFans = profile[3].toNumber();
 			return { address, name: profile[0], description: profile[1], cost: profile[2].toNumber() };
 		})
 		.catch(e => {
