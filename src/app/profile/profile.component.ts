@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.isFan();
 	}
 
 	@HostListener('window:load')
@@ -160,9 +161,13 @@ export class ProfileComponent implements OnInit {
 		.deployed()
 		.then(instance => {
 			fan= instance;
+			debugger;
 			return fan.isFanOf.call(this.address, {from: this.account});
 		})
-		.then(isFanOf => {this.isFanOf = isFanOf; debugger;})
+		.then(isFanOf => {
+			this.isFanOf = isFanOf;
+			console.log(isFanOf)
+			debugger;})
 		.catch(e => {console.log(e)})
 	}
 
