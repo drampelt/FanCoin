@@ -53,3 +53,12 @@ h1 {
 .subtitle {
 	text-align: center;
 }
+
+.price {
+	width: 100px;
+	margin-right: 10px;
+}
+
+.label {
+	margin-top: 10px;
+}

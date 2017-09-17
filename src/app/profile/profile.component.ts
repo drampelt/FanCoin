@@ -30,6 +30,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 	allPosts: any;
 	isFanOf: boolean;
 	content: any;
+	profileName: any;
+	profileDescription: any;
+	profilePrice: any;
 
 	constructor(private route: ActivatedRoute, private _ngZone: NgZone, private sanitizer: DomSanitizer) {
 		this.route.params.subscribe( params => {this.address = params["address"]})
@@ -124,8 +127,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 		})
 		.then(profile => {
 			this.name = profile[0];
+			this.profileName = this.name;
 			this.description = profile[1];
+			this.profileDescription = this.description;
 			this.cost = profile[2];
+			this.profilePrice = this.cost;
 			return { address, name: profile[0], description: profile[1], cost: profile[2].toNumber() };
 		})
 		.catch(e => {
@@ -213,6 +219,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 		modal.classList.toggle('is-active');
 	}
 
+	toggleProfileModal = (event) => {
+		let modal = document.getElementById('profile-modal');
+		modal.classList.toggle('is-active');
+	}
+
 	submitPost = (event) => {
 		let modal = document.getElementById('modal');
 		let fan;
@@ -222,7 +233,26 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			fan= instance;
 			return fan.createPost(this.content, {from: this.account});
 		})
-		.then(modal.classList.toggle('is-active'))
+		.then(() => {
+			modal.classList.toggle('is-active')
+			setTimeout(() => { location.reload() }, 1000);
+		})
+		.catch(e => {console.log(e)})
+	}
+
+	updateProfile = (event) => {
+		let modal = document.getElementById('profile-modal');
+		let fan;
+		return this.FanCoin
+		.deployed()
+		.then(instance => {
+			fan= instance;
+			return fan.updateProfile(this.profileName, this.profileDescription, this.profilePrice, {from: this.account});
+		})
+		.then( () => {
+			modal.classList.toggle('is-active');
+			setTimeout(() => { location.reload() }, 1000);
+		})
 		.catch(e => {console.log(e)})
 	}
 
