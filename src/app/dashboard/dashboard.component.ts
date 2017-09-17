@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener, NgZone } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 const Web3 = require('web3');
 const contract = require('truffle-contract');
 const fancoinArtifacts = require('../../../build/contracts/FanCoin.json');
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit {
   recipientAddress: string;
   status: string;
 
-  constructor(private _ngZone: NgZone) {
+  constructor(private _ngZone: NgZone, private sanitizer: DomSanitizer) {
 
   }
 
@@ -101,6 +102,10 @@ export class DashboardComponent implements OnInit {
     })
     .then(posts => {
       this.posts = posts;
+      for (let i = 0; i < posts.length; i++){
+        posts[i][2] = this.sanitizer.bypassSecurityTrustHtml(posts[i][2]);
+        posts[i][3] = new Date(posts[i][3].toNumber() * 1000)
+      }
     })
     .catch(e => {
       console.log(e);
