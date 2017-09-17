@@ -1,3 +1,8 @@
 .user-list {
-  padding: 32px;
+  padding: 16px;
+}
+
+.explore-title {
+  text-align: center;
+  margin-top: 32px;
 }
