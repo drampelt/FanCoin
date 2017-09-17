@@ -13,3 +13,43 @@
 	margin-left: auto;
 	width: 600px;
 }
+
+.profilepic {
+	width: 150px;
+	height: 150px;
+}
+
+.introduction {
+	margin-top: 25px;
+	text-align: center;
+	padding: 10px;
+}
+
+h1 {
+	font-size: 30px;
+}
+
+.cost {
+	font-size: 35px;
+	color: #00CDA9;
+}
+
+.actionbutton {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.become_fan_button{
+	padding: 20px;
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.card {
+	margin-bottom: 20px;
+}
+
+.subtitle {
+	text-align: center;
+}

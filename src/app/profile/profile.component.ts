@@ -21,6 +21,11 @@ export class ProfileComponent implements OnInit {
 	web3: any;
 	address: any;
 	name: any;
+	description: any;
+	cost: any;
+	ownProfile: boolean;
+	allPosts: any;
+	isFanOf: boolean;
 
 	constructor(private route: ActivatedRoute, private _ngZone: NgZone) {
 		this.route.params.subscribe( params => {this.address = params["address"]})
@@ -73,12 +78,18 @@ export class ProfileComponent implements OnInit {
 			}
 			this.accounts = accs;
 			this.account = this.accounts[0];
-
+			let profileAddress;
 			this._ngZone.run(() => {
+				if (!this.address || this.address === this.account) {
+					this.ownProfile = true;
+				}
 				if (!this.address)
-					this.loadProfile(this.address)
+					profileAddress = this.account
 				else
-					this.loadProfile(this.address)
+					profileAddress = this.address
+
+				this.loadProfile(profileAddress)
+				this.loadOwnedPosts(profileAddress)
 			});
 
 			// This is run from window:load and ZoneJS is not aware of it we
@@ -98,6 +109,8 @@ export class ProfileComponent implements OnInit {
 		})
 		.then(profile => {
 			this.name = profile[0];
+			this.description = profile[1];
+			this.cost = profile[2];
 			return { address, name: profile[0], description: profile[1], cost: profile[2].toNumber() };
 		})
 		.catch(e => {
@@ -105,6 +118,65 @@ export class ProfileComponent implements OnInit {
 			// this.setStatus('Error getting balance; see log.');
 		});
 	};
+
+	loadOwnedPosts = (address) => {
+		let fan;
+		return this.FanCoin
+		.deployed()
+		.then(instance => {
+			fan = instance;
+			return fan.getOwnedPosts.call(address, {
+				from: this.account
+			});
+		})
+		.then(ownedPosts => {
+			Promise.all(ownedPosts.map((id) => this.loadPost(id.toNumber()))).then( allPosts => { 
+				this.allPosts = allPosts;
+				for (let i = 0; i < allPosts.length; i++){
+					allPosts[i][3] = new Date(allPosts[i][3].toNumber() * 1000)
+				}
+			});
+		})
+		.catch(e => {
+			console.log(e);
+		})
+	}
+
+	loadPost = (id) => {
+		let fan;
+		return this.FanCoin
+		.deployed()
+		.then(instance => {
+			fan= instance;
+			return fan.getPost.call(id, { from: this.account});
+		})
+		.then(post => {return post})
+		.catch(e => {console.log(e)})
+	}
+
+	isFan = () => {
+		let fan;
+		return this.FanCoin
+		.deployed()
+		.then(instance => {
+			fan= instance;
+			return fan.isFanOf.call(this.address, {from: this.account});
+		})
+		.then(isFanOf => {this.isFanOf = isFanOf; debugger;})
+		.catch(e => {console.log(e)})
+	}
+
+	becomeFan = (event) => {
+		let fan;
+		return this.FanCoin
+		.deployed()
+		.then(instance => {
+			fan= instance;
+			return fan.becomeFan(this.address, {from: this.account});
+		})
+		.then()
+		.catch(e => {console.log(e)})
+	}
 
 
 };
