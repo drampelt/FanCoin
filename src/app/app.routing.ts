@@ -7,6 +7,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ExploreComponent } from './explore/explore.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const appRoutes: Routes = [
@@ -25,6 +26,10 @@ const appRoutes: Routes = [
     {
       path:"explore",
       component: ExploreComponent,
+    },
+    {
+      path:"dashboard",
+      component: DashboardComponent,
     },
     // {
     //     path:"videos",

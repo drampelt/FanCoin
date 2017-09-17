@@ -1,0 +1,22 @@
+<div class="notifications">
+  <div *ngFor="let post of posts" class="card">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-content">
+          <p class="title is-4">{{post[2]}}</p> <br>
+          <p class="subtitle is-6">{{name}}</p>
+        </div>
+      </div>
+
+      <div class="content">
+        <!--           <div class="card-image">
+          <figure class="image is-4by3">
+          <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          </figure>
+          </div> -->
+          <time datetime="2016-1-1">{{post[3]}}</time>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ExploreComponent } from './explore/explore.component';
 import { UserListItemComponent } from './user-list-item/user-list-item.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   { path: 'profile', component: LandingPageComponent },
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     LandingPageComponent,
     ExploreComponent,
-    UserListItemComponent
+    UserListItemComponent,
+    DashboardComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
