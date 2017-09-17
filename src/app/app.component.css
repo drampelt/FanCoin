@@ -1,0 +1,12 @@
+.balance {
+  position: absolute;
+  top: 38px;
+  right: 270px;
+  z-index: 20;
+}
+
+.balance img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
