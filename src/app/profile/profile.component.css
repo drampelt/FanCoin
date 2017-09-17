@@ -1,0 +1,15 @@
+.posting{
+	width: 300px;
+	text-align: center;
+}
+
+.notifications{
+	margin-top: 40px;
+	text-align: center;
+}
+
+.card {
+	margin-right: auto;
+	margin-left: auto;
+	width: 600px;
+}

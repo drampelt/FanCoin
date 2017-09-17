@@ -14,6 +14,10 @@ const appRoutes: Routes = [
         component: LandingPageComponent,
     },
     {
+        path:"profile/:address",
+        component: ProfileComponent,
+    },
+    {
         path:"profile",
         component: ProfileComponent,
     },
