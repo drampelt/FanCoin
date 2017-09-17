@@ -4,12 +4,12 @@
     <div id="profilepic"></div>
     <h1> <b>{{name}}</b></h1>
     <h2> {{description}} </h2>
-    <span class="cost"> {{cost}} FanCoin </span>
+    <span class="cost"> {{cost}} FAN per creation </span>
     <div class="actionbutton" *ngIf="!ownProfile && !isFanOf">
       <a class="button is-primary become_fan_button" (click)="becomeFan($event)">Become a Fan!</a>
     </div>
     <div class="actionbutton" *ngIf="!ownProfile && isFanOf">
-      <a class="button is-danger become_fan_button" (click)="stopSupporting($event)">Unfollow</a>
+      <a class="button is-danger become_fan_button" (click)="stopSupporting($event)">Stop Supporting :(</a>
     </div>
     <div class="actionbutton" *ngIf="ownProfile">
       <a class="button is-primary become_fan_button" (click)="toggleProfileModal($event)" >Change Profile</a>

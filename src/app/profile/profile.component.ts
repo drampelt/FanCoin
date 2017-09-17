@@ -192,7 +192,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			fan= instance;
 			return fan.becomeFan(this.address, {from: this.account});
 		})
-		.then(this.isFan())
+    .then(() => { setTimeout(() => { location.reload() }, 1000) })
 		.catch(e => {console.log(e)})
 	}
 
@@ -204,7 +204,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			fan= instance;
 			return fan.stopSupporting(this.address, {from: this.account});
 		})
-		.then(this.isFan())
+		.then(() => { setTimeout(() => { location.reload() }, 1000) })
 		.catch(e => {console.log(e)})
 	}
 
@@ -225,6 +225,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 		.then(modal.classList.toggle('is-active'))
 		.catch(e => {console.log(e)})
 	}
- 
+
 
 };
