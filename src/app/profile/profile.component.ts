@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
 	ownProfile: boolean;
 	allPosts: any;
 	isFanOf: boolean;
+	content: any;
 
 	constructor(private route: ActivatedRoute, private _ngZone: NgZone, private sanitizer: DomSanitizer) {
 		this.route.params.subscribe( params => {this.address = params["address"]})
@@ -196,5 +197,23 @@ export class ProfileComponent implements OnInit {
 		.catch(e => {console.log(e)})
 	}
 
+	togglePostModal = (event) => {
+		let modal = document.getElementById('modal');
+		modal.classList.toggle('is-active');
+	}
+
+	submitPost = (event) => {
+		let modal = document.getElementById('modal');
+		let fan;
+		return this.FanCoin
+		.deployed()
+		.then(instance => {
+			fan= instance;
+			return fan.createPost(this.content, {from: this.account});
+		})
+		.then(modal.classList.toggle('is-active'))
+		.catch(e => {console.log(e)})
+	}
+ 
 
 };

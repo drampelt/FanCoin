@@ -15,7 +15,7 @@
       <a class="button is-primary become_fan_button">Change Profile</a>
     </div>
     <div class="actionbutton" *ngIf="ownProfile">
-      <a class="button is-info become_fan_button">Create a Post</a>
+      <a class="button is-info become_fan_button" (click)="togglePostModal($event)" >Create a Post</a>
     </div>
   </header>
 </div>
@@ -42,19 +42,24 @@
   </div>
 </div>
 
-<div class="modal">
+<div class="modal" id="modal">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
-      <button class="delete" aria-label="close"></button>
+      <p class="modal-card-title">Create a Post</p>
+      <button class="delete" aria-label="close" (click)="togglePostModal($event)"></button>
     </header>
     <section class="modal-card-body">
-      <!-- Content ... -->
+      <div class="field">
+        <label class="label">Content:</label>
+        <div class="control">
+          <textarea class="textarea" placeholder="Place your content here" [(ngModel)]="content"></textarea>
+        </div>
+      </div>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success">Save changes</button>
-      <button class="button">Cancel</button>
+      <button class="button is-success" (click)="submitPost($event)">Submit Post</button>
+      <button class="button toggle-modal" (click)="togglePostModal($event)">Cancel</button>
     </footer>
   </div>
 </div>
