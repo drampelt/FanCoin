@@ -154,7 +154,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 		})
 		.then(ownedPosts => {
 			Promise.all(ownedPosts.map((id) => this.loadPost(id.toNumber()))).then( allPosts => {
-				this.allPosts = allPosts;
+				this.allPosts = allPosts.reverse();
 				for (let i = 0; i < allPosts.length; i++){
 					allPosts[i][2] = this.sanitizer.bypassSecurityTrustHtml(allPosts[i][2]);
 					allPosts[i][3] = new Date(allPosts[i][3].toNumber() * 1000)

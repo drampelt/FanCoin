@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
       return Promise.all(value.map((id) => this.loadPost(id)));
     })
     .then(posts => {
-      this.posts = posts;
+      this.posts = posts.reverse();
       for (let i = 0; i < posts.length; i++){
         posts[i][2] = this.sanitizer.bypassSecurityTrustHtml(posts[i][2]);
         posts[i][3] = new Date(posts[i][3].toNumber() * 1000)
