@@ -1,11 +1,3 @@
-<a class="user" *ngFor="let profile of profiles" href="/profile/{{profile.address}}">
-  <div class="name">
-    {{profile.name}}
-  </div>
-  <div class="description">
-    {{profile.description}}
-  </div>
-  <div class="cost">
-    {{profile.cost}}
-  </div>
-</a>
+<div class="user-list">
+  <user-list-item *ngFor="let profile of profiles" [profile]="profile"></user-list-item>
+</div>

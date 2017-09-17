@@ -35,9 +35,13 @@ contract FanCoin is MintableToken {
     totalSupply = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
 
-    updateProfile("Test Content Creator", "First user of the platform", 5);
-    createPost("An amazing post");
-    createPost("Another amazing post");
+    updateProfile("Primitive Technology", "I make videos about making things entirely from scratch in the wild. With my Fans' support I will be able to make this hobby a full time job. In return my fans will receive more videos with better content as my skills and technologies increase. Then they can learn these skills too.", 5);
+    createPost('<iframe width="560" height="315" src="https://www.youtube.com/embed/c2ExwOAjLNw" frameborder="0" allowfullscreen></iframe>');
+    createPost('<iframe width="560" height="315" src="https://www.youtube.com/embed/i-WYT2UotIc" frameborder="0" allowfullscreen></iframe>');
+
+    // updateProfile("Philip DeFranco", "Hi, my name is Philip DeFranco. I created and run the Philip DeFranco Show! A Monday-Thursday show that covers domestic and international news. A show that prides itself on exposing fake news, properly investigating, researching and explaining all sides/arguments, and then sharing my opinion to start a discussion about this crazy world that we live in. No one knows what to believe anymore and I aim to be the place people go when they want to trust whats in front of them.", 1);
+    // createPost('<iframe width="560" height="315" src="https://www.youtube.com/embed/fzVYbwQBcy4" frameborder="0" allowfullscreen></iframe>');
+    // createPost('<iframe width="560" height="315" src="https://www.youtube.com/embed/SSOM3dbCl7Y" frameborder="0" allowfullscreen></iframe>');
   }
 
   function getFans(address _creator) constant returns (address[]) {

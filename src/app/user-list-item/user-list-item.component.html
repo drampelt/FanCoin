@@ -1,0 +1,25 @@
+<div class="user card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left" id="profile-image-{{profile.address}}">
+        <!-- blockies icon -->
+      </div>
+      <div class="media-content">
+        <div class="title is-4">
+          {{profile.name}}
+        </div>
+        <div class="subtitle is-6">
+          {{profile.cost}} FAN per creation
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="description">
+        {{profile.description}}
+      </div>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="/profile/{{profile.address}}" class="card-footer-item">View Profile</a>
+  </footer>
+</div>
