@@ -1,5 +1,7 @@
 import { Component, HostListener, OnInit, NgZone } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import { DomSanitizer } from '@angular/platform-browser';
+
 const Web3 = require('web3');
 const contract = require('truffle-contract');
 const fancoinArtifacts = require('../../../build/contracts/FanCoin.json');
@@ -27,7 +29,7 @@ export class ProfileComponent implements OnInit {
 	allPosts: any;
 	isFanOf: boolean;
 
-	constructor(private route: ActivatedRoute, private _ngZone: NgZone) {
+	constructor(private route: ActivatedRoute, private _ngZone: NgZone, private sanitizer: DomSanitizer) {
 		this.route.params.subscribe( params => {this.address = params["address"]})
 	}
 
@@ -134,6 +136,7 @@ export class ProfileComponent implements OnInit {
 			Promise.all(ownedPosts.map((id) => this.loadPost(id.toNumber()))).then( allPosts => { 
 				this.allPosts = allPosts;
 				for (let i = 0; i < allPosts.length; i++){
+					allPosts[i][2] = this.sanitizer.bypassSecurityTrustHtml(allPosts[i][2]);
 					allPosts[i][3] = new Date(allPosts[i][3].toNumber() * 1000)
 				}
 			});
